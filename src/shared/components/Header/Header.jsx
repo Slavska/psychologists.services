@@ -26,6 +26,7 @@ import { selectUserName } from "../../../redux/auth/authSelectors";
 import { useSelector } from "react-redux";
 import icon from "../../images/symbol-defs.svg";
 import { NavItemColor, NavItemHome } from "../Navigation/Navigation.styled";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [isModalLoginOpen, setModalLoginOpen] = useState(false);
@@ -36,6 +37,7 @@ export const Header = () => {
   const [displayName, setDisplayName] = useState("");
   const name = useSelector(selectUserName);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLoginOpen = () => {
     setModalLoginOpen(true);
@@ -59,6 +61,7 @@ export const Header = () => {
       setModalRegistrationOpen(false);
       setLoggedIn(false);
       await dispatch(signout());
+      navigate("/");
     } catch (error) {
       console.error("Failed to sign out:", error);
     }
